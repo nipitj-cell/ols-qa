@@ -23,9 +23,14 @@ Placeholders: `{KEY}` `{APP_PKG}` `{AVD_NAME}` `{SERIAL}` `{WEB_HOST}` `{DESTINA
 | Duplicates | whether a same-name file in the destination may be replaced (old one to trash) — default: no |
 | Clip style | default: one clip per AC, touches shown; changeable on request (§9) |
 
+**Finding `{APP_PKG}` and `{WEB_HOST}`** (the workspace guide may hold only placeholders): with the app in the foreground, `{APP_PKG}` is the package in the `mCurrentFocus` line of `dumpsys window`; on a debuggable image `{WEB_HOST}` is the host of the page URL printed by `http://localhost:<port>/json` after the forward (§3.3); on a non-debuggable image read it from the workspace guide or ask. Record both in the workspace guide after the first run so the next round does not ask.
+
+**Ticket type.** A Story with AC/EC is planned as usual. A **Bug** or a ticket with an empty description has no confirmed spec: the router sends a Bug to `retest-bug-workflow`; use this branch for it only when the person asks for a test run, plan only the scenarios the title supports, write no expected result of your own, and mark them `BLOCKED — no confirmed spec` (WORKFLOW Phase B) until the owner names the expected behaviour.
+
 ## 2. Device rules (R2)
 
 - Resolve `{SERIAL}` by AVD name (`adb -s <serial> emu avd name`). Zero or two matches = stop.
+- `adb` comes with the Android SDK platform-tools and is often not on `PATH`: use `$ANDROID_HOME/platform-tools/adb` (Android Studio → SDK Manager shows the SDK path) and say which one you used. `adb devices` listing nothing = no emulator is running: stop and ask the person to start the AVD from Android Studio's Device Manager; do not start emulators yourself and do not invent a serial (`device.js` returns `no-device`).
 - A device is **busy** when `adb -s {SERIAL} shell pidof screenrecord` prints a pid, or another session is driving it. Never touch a busy device or one intake did not name. **One driver per device** — if you need it, tell the person.
 - Never drive a device while another tool of yours (a survey, a script) is still running on it: stop it by pid first.
 

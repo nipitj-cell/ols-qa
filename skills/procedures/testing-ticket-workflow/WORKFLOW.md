@@ -248,6 +248,16 @@ Execution plan: see filled template (preflight, evidence, pass criteria). Its Ex
 Reply **confirm** to start the run, or tell me what to change.
 ```
 
+**Android SuperApp rows.** On the Android branch the plan above changes in two places: the `Login:` line, and five extra lines under it (values and how to find them: [android-superapp-branch.md §1](references/android-superapp-branch.md)).
+
+```text
+Login:       {user} — the person logs in on the device; never a password; a dead session stops the run and the person is asked
+Device:      {AVD name} → {serial} · idle (pidof screenrecord empty) · {debuggable | not debuggable: OCR taps, DOM checks BLOCKED}
+App build:   {versionName / versionCode from dumpsys package}
+Evidence:    {destination or none} · same-name duplicate: {old to trash | never}
+Clip style:  {one clip per AC, touches shown | the person's change}
+```
+
 If the results contradict expectations or tests are flaky, follow [qa-debug-discipline.md](../../../references/qa-debug-discipline.md) before changing pass/fail wording. "Flaky" is a hypothesis, not a
 conclusion — it needs the E2 investigation and an artifact like any other cause.
 
