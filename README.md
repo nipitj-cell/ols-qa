@@ -83,6 +83,28 @@ over the Jira REST API — they never touch a visible browser or the user's scre
 
 Contributor commands (developing Helix, not QA workflows): `/helix-check` (regression check before merge) · `/helix-release` (verify and ship Helix changes to main; CI owns the version bump).
 
+## Android SuperApp testing — เริ่มใช้ (`/testing-ticket`)
+
+ทดสอบเว็บแอปที่เปิดอยู่ในแอป SuperApp บน Android emulator: อัดคลิปแยกตาม AC แสดงรอยแตะ ตรวจคลิปก่อนส่ง อัปโหลดขึ้น Drive ตั้งชื่อตาม AC แล้วทำร่างคอมเมนต์ Jira ให้คนโพสต์เอง กติกาทั้งหมดอยู่ใน [android-superapp-branch.md](skills/procedures/testing-ticket-workflow/references/android-superapp-branch.md) (spec: `docs/sdd/mobile-superapp-testing/spec.md`)
+
+**ต้องมีในเครื่องที่รัน**
+
+| ของที่ต้องมี | หมายเหตุ |
+|---|---|
+| Android Studio + emulator + `adb` | ใช้ image แบบ `google_apis` (debuggable) จะอ่านหน้าเว็บได้ครบ ถ้าเป็นอิมเมจ Play Store กดด้วย OCR และการวัดที่ต้องอ่าน DOM จะเป็น BLOCKED |
+| Node.js ≥ 18 | ตัวช่วยใน `tools/superapp-test/` ไม่มี dependency |
+| macOS (ไม่บังคับ) | ตัว OCR และตัวทำแถบเฟรมเป็น Swift: `swiftc -O tools/superapp-test/swift/ocr.swift -o ocr` (คอมไพล์ทีละไฟล์) ถ้าไม่มี สกิลจะบอกว่าตรวจข้อไหนไม่ได้ |
+| Chrome ที่ล็อกอิน Google | ใช้ตอนอัปโหลดคลิปขึ้น Drive (อัปทีละไฟล์ ไฟล์ละไม่เกินประมาณ 7 MB เพราะตัวส่งนับขนาดแบบ base64 รวมต่อรอบไม่เกิน 10 MB) |
+| APK ของแอป, VPN, บัญชีทดสอบ | ขอจากผู้ดูแลระบบ ไม่อยู่ใน repo ค่าจริงเก็บใน `references/` ของ workspace ตัวเอง (ใน repo มีแต่ placeholder) |
+
+**ขั้นแรก**
+1. เปิดโฟลเดอร์นี้ใน Claude Code แล้ว trust โปรเจกต์ จากนั้นพิมพ์ `/testing-ticket` ตามด้วยลิงก์การ์ด
+2. ตอบช่อง intake ในข้อความเดียว: แพลตฟอร์ม = `Android SuperApp`, ชื่อ AVD, บัญชี (ไม่ใช้รหัสผ่าน), VPN, ปลายทางอัปโหลดคลิป และนโยบายไฟล์ชื่อซ้ำ
+3. ล็อกอินบน emulator เอง สกิลไม่พิมพ์รหัสผ่านและหยุดทุกครั้งที่เจอหน้า login
+4. ตรวจแผนที่สกิลแสดง แล้วยืนยันก่อนเริ่มอัด สกิลไม่เริ่มก่อนยืนยัน
+
+**ข้อจำกัดที่ควรรู้:** emulator หนึ่งเครื่องให้ session เดียวขับต่อครั้ง ไม่เปิดบั๊กเอง ไม่บันทึกสื่อเข้าระบบเว้นแต่ถูกอนุญาตตอนยืนยันแผน และผลที่ได้จากแถบเฟรมจะระบุว่าเป็นแถบเฟรม ไม่ใช่การวัด
+
 ## OLS links
 
 - **Jira board:** https://<ORG>.atlassian.net/jira/software/projects/OLS/boards/818/backlog
