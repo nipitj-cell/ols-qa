@@ -52,6 +52,7 @@ Grouped by the phase that reaches the trigger; each line names its exact trigger
 #### Intake and plan (Phases A–C)
 
 - [session-intake.md](../procedures/testing-ticket-workflow/references/session-intake.md) — at Phase A — the six intake fields and the confirmation gate.
+- [android-superapp-branch.md](../procedures/testing-ticket-workflow/references/android-superapp-branch.md) — read when the ticket is tested through a SuperApp on an Android emulator: intake extras, device rules, preflight, driving, recording, upload, revision loop.
 - [workspace-guide-discovery.md](../../references/workspace-guide-discovery.md) — read at Phase A to locate the workspace project guide for this workflow.
 - [helix-session-constraints.md](../../references/helix-session-constraints.md) — read at the first reply, when the preamble says to recite the session constraints.
 - [user-communication.md](../../references/user-communication.md) — before the first message to the user (language and tone).

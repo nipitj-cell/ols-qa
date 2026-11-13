@@ -141,6 +141,8 @@ Collect these **six** items. Ask every missing field in **one** message; fields 
 
 🔴 GATE: **wait** until the required fields are answered before Phase B.
 
+**Platform.** Android SuperApp tickets (a web app inside a native app on an emulator) add intake fields — device by AVD name, app build, evidence destination, duplicates policy — asked in this same message; details in the branch reference (see also [android-superapp-branch.md](references/android-superapp-branch.md)). Every other platform keeps the web path below unchanged.
+
 **Workspace-guide values are not asked again** ([round-time-contract.md §2](../../../references/round-time-contract.md)). Environment, account pool, auth directory, Jira post format, results destination and similar per-project values are read from the workspace guide. A value that is missing is asked **once** and **saved to the guide immediately** — no second "save this?" question
 ([workspace-guide-discovery.md](../../../references/workspace-guide-discovery.md)). Never store production passwords in a committed guide.
 
@@ -256,6 +258,8 @@ conclusion — it needs the E2 investigation and an artifact like any other caus
 ## Phase D — Pre-flight (mandatory) [low freedom]
 
 At Phase D, follow [playwright-preflight.md](../../../references/playwright-preflight.md) in full. 🔴 GATE: MUST NOT start Phase E until **Ready to run: YES**.
+
+On an Android SuperApp device the branch's own preflight (see also [android-superapp-branch.md §3](references/android-superapp-branch.md)) replaces the browser login steps: device resolved and idle, session live by the app's API (or read from the screen and said so), keyboard frame measured. The gate is the same: without **Ready to run: YES** nothing is recorded.
 
 The login smoke table from *Refusal-first* already shows which roles log in; this phase does not
 repeat it. It re-checks each lane's session right before that lane's first scenario, because a session
