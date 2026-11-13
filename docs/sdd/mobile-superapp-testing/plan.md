@@ -30,3 +30,11 @@ Two PRs, in this order (the SDD gate wants the spec on `main` first):
   own reference file, link from WORKFLOW, run `context_budget.test.js`.
 - The portability scan rejects machine paths → use `{SERIAL}`, `{APP_PKG}`, `/sdcard/` device paths only.
 - Swift helpers are macOS-only → documented as optional; the skill states what is BLOCKED without them.
+
+## Files the code PR touches (named so the gate's plan check sees them)
+
+- `skills/procedures/testing-ticket-workflow/WORKFLOW.md` — Phase A and Phase D pointers
+- `skills/testing-ticket-workflow/SKILL.md` — one *On trigger* line
+- `references/ols-project-guide.md` — one SuperApp row (placeholders only)
+- `skills/procedures/testing-ticket-workflow/references/android-superapp-branch.md` — new
+- `tools/superapp-test/` — new
